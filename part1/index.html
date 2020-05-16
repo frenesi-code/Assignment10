@@ -8,7 +8,20 @@
     <!-- jQuery library reference. Latest is always referenced from jQuery's CDN. -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   	<script>
-		// WRITE YOUR CODE HERE
+		$( document ).ready(function() {
+            $( "section > a" ).on('click', function (event) {                                                
+                switch (event.currentTarget.id) {
+                    case 'vprospect':
+                        $( "#solution" ).load( "solutions.html #vprospect" );
+                        break;
+                    case "vconvert":
+                        $( "#solution" ).load( "solutions.html #vconvert" );
+                        break;
+                    case "vretain":
+                        $( "#solution" ).load( "solutions.html #vretain" );
+                }
+            })
+        });
     </script>
 </head>
 
