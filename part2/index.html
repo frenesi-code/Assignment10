@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Welcome to Vecta Corp.</title>
@@ -7,32 +8,60 @@
     <link href="styles.css" rel="stylesheet">
     <!-- jQuery library reference. Latest is always referenced from jQuery's CDN. -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
-		// WRITE YOUR CODE HERE
+    <script>
+        $(document).ready(function () {
+
+            var xhr = $.get("team.xml", function () {
+                console.log("Load was performed");
+            })
+                .done(function (xmlDocument) {
+
+                    let team = xmlDocument.getElementsByTagName('teammember')
+                    let html = "", i;
+
+                    Array.from(team).forEach((element, index) => {
+                        html += element.getElementsByTagName("name").item(0).innerHTML + "<br>" +
+                            element.getElementsByTagName("title").item(0).innerHTML + "<br>" +
+                            element.getElementsByTagName("bio").item(0).innerHTML + "<br><br>"                        
+                    })
+                    
+                    $('#team').append(html);
+                })
+                
+                .fail(function () {
+                    console.log("Error loading the xml file");
+                })
+                
+                .always(function () {
+                    console.log("Loaded Completed");
+                });
+
+        });
     </script>
 </head>
 
 <body>
-<section id="container">
-    <header></header>
-    
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="aboutus.html">About Us</a></li>
-            <li><a href="solutions.html">Solutions</a></li>
-            <li><a href="support.html">Support</a></li>
-            <li><a href="contactus.html">Contact Us</a></li>
-        </ul>
-    </nav>
-    
-    <section id="content">
-        <h2>The Vecta Corp. Management Team</h2>
+    <section id="container">
+        <header></header>
 
-		<div id="team"></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <section id="content">
+            <h2>The Vecta Corp. Management Team</h2>
+
+            <div id="team"></div>
+        </section>
+
+        <footer></footer>
     </section>
-    
-    <footer></footer>
-</section>
 </body>
+
 </html>
